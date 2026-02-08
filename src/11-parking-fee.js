@@ -34,4 +34,27 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
+    if(hours <= 0 || isNaN(hours)){
+        return -1;
+    }
+    const roundedHours = Math.ceil(hours);
+    let fee = 0;
+    let dailyMax = 0;
+    switch(vehicleType.toLowerCase()){
+        case "car":
+            fee = 5 + (roundedHours - 1) * 3;
+            dailyMax = 30;
+            break;
+        case "motorcycle":
+            fee = 3 + (roundedHours - 1) * 2;
+            dailyMax = 18;
+            break;
+        case "bus":
+            fee = 10 + (roundedHours - 1) * 7;
+            dailyMax = 60;
+            break;
+        default:
+            return -1;
+    }
+    return Math.min(fee, dailyMax);
 }
